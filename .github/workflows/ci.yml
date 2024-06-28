@@ -12,13 +12,19 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
-          java-version: '11'
+          java-version: '8'
 
       - name: Compile the project
         run: mvn test-compile -pl core -am
   
       - name: Run tests
         run: mvn -pl core test -Dtest=org.apache.struts2.views.freemarker.FreemarkerResultMockedTest#testDynamicAttributesSupport
+        
+      # - name: Set up JDK 8 for NonDex
+      #   uses: actions/setup-java@v2
+      #   with:
+      #     distribution: 'adopt'
+      #     java-version: '8'
   
       - name: Run NonDex to check for flaky tests
         run: mvn -pl core edu.illinois:nondex-maven-plugin:1.1.2:nondex -Dtest=org.apache.struts2.views.freemarker.FreemarkerResultMockedTest#testDynamicAttributesSupport -DnondexRuns=10
