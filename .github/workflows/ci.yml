@@ -13,6 +13,8 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: '8'
+      - name: Check version
+        run: git checkout 3a7c35a014f8a3471a1b75e7546e01ecf21d5db3
 
       - name: Compile the project
         run: mvn test-compile -pl core -am
